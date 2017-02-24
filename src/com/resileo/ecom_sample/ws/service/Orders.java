@@ -12,7 +12,7 @@ public class Orders {
 			Random r = new Random();
 			int nWait = r.nextInt(6-2) + 2;
 			
-			Thread.sleep( nWait );
+			Thread.sleep( nWait*1000 );
 		} catch(Throwable th) {
 			System.out.println("Exception while processing Items.getItemStatus(): "+th.getMessage());
 		}
