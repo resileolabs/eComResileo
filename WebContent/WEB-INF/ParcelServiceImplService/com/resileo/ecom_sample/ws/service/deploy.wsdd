@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ParcelServiceImplService WSDL service -->
+
+  <service name="ParcelServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.ws.ecom_sample.resileo.com"/>
+      <parameter name="wsdlServiceElement" value="ParcelServiceImplService"/>
+      <parameter name="schemaQualified" value="http://service.ws.ecom_sample.resileo.com,http://bean.ws.ecom_sample.resileo.com"/>
+      <parameter name="wsdlServicePort" value="ParcelServiceImpl"/>
+      <parameter name="className" value="com.resileo.ecom_sample.ws.service.ParcelServiceImpl"/>
+      <parameter name="wsdlPortType" value="ParcelServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.ws.ecom_sample.resileo.com" xmlns:retNS="http://service.ws.ecom_sample.resileo.com" xmlns:rtns="http://bean.ws.ecom_sample.resileo.com" name="getTrackingIdStatus" qname="operNS:getTrackingIdStatus" returnQName="retNS:getTrackingIdStatusReturn" returnType="rtns:ParcelBean" soapAction="">
+        <parameter xmlns:pns="http://service.ws.ecom_sample.resileo.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:trackId" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getTrackingIdStatus"/>
+
+      <typeMapping xmlns:ns="http://bean.ws.ecom_sample.resileo.com" qname="ns:ParcelBean" type="java:com.resileo.ecom_sample.ws.bean.ParcelBean" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
