@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<project name="ecomresileo" default="package">
+		<path id="libpath">
+             <fileset dir="WebContent/WEB-INF/lib">
+                <include name="**/*.jar"/>
+             </fileset>
+        </path> 
+		<target name="init">
+			<property name="src_dir" value="src"/>
+			<property name="classes" value="resileo_temp/classes"/>
+			<property name="wars" value="resileo_temp/wars"/>
+			<property name="web.xml" value="WebContent/WEB-INF/web.xml"/>
+		</target>        
+		<target name="clean" depends="init">
+            <delete dir="resileo_temp"/>
+        </target>
+		<target name="prepare" depends="clean">
+	         <mkdir dir="${classes}"/>
+		     <mkdir dir="${wars}"/>
+		</target>
+        <target name="compile" depends="prepare">
+            <javac destdir="${classes}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+		 		<src path="${src_dir}"/>
+         		<classpath refid="libpath"/>
+            </javac>
+        </target>
+		
+        <target name="package" depends="compile">
+                <war destfile="${wars}/appedo_collector.war" webxml="${web.xml}">
+                        <fileset dir="WebContent"/>
+                        <classes dir="${classes}"/>
+                </war>
+				<copy file="${wars}/eComResileo.war" todir="/opt/artifacts"/>
+        </target>
+</project>
